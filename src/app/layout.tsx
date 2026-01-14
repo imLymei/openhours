@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "./global.css";
 import { APP } from "@/lib/config";
 import { cx } from "@/lib/utils";
 import { ThemeProvider } from "next-themes";
+import Navbar from "./_components/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,7 +32,7 @@ export default function RootLayout({
         className={cx(
           geistSans.variable,
           geistMono.variable,
-          "h-screen w-screen overflow-auto bg-neutral-50 text-neutral-950 antialiased dark:bg-neutral-950 dark:text-neutral-50",
+          "flex h-dvh w-dvw flex-col bg-neutral-50 text-neutral-950 antialiased dark:bg-neutral-950 dark:text-neutral-50",
         )}
       >
         <ThemeProvider
@@ -40,7 +41,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <main className="mb-24 flex-1 overflow-auto">{children}</main>
+          <Navbar />
         </ThemeProvider>
       </body>
     </html>

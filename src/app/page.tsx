@@ -1,30 +1,37 @@
 "use client";
 
+import Button from "@/components/ui/Button";
+import useTime from "@/hooks/useTime";
 import { APP } from "@/lib/config";
-import { useTheme } from "next-themes";
-import { useEffect, useEffectEvent, useState } from "react";
+import { useState } from "react";
 
 export default function Home() {
-  const [isMounted, setIsMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
-
-  const mountPage = useEffectEvent(() => setIsMounted(true));
-
-  useEffect(() => {
-    mountPage();
-  }, []);
-
-  if (!isMounted) return;
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const time = useTime();
 
   return (
-    <div>
-      <p>{APP.name}</p>
-      <p>{APP.version}</p>
+    <div className="grid h-full grid-rows-3 p-6">
       <div>
-        The current theme is: {theme}
-        <button onClick={() => setTheme("light")}>Light Mode</button>
-        <button onClick={() => setTheme("dark")}>Dark Mode</button>
+        <div className="flex items-center justify-center gap-2">
+          <p className="text-2xl font-bold">{APP.name}</p>
+          <p className="text-xs text-neutral-500">v{APP.version}</p>
+        </div>
+        <p className="text-center text-4xl font-bold">
+          {selectedDate.toLocaleDateString()}
+        </p>
       </div>
+      <div className="flex flex-col items-center justify-center gap-2">
+        <Button
+          className="aspect-square text-4xl font-bold"
+          suppressHydrationWarning
+        >
+          {time.hour.toString().padStart(2, "0")}:
+          {time.minute.toString().padStart(2, "0")}:
+          {time.seconds.toString().padStart(2, "0")}
+        </Button>
+        <Button variant="destructive">Skip</Button>
+      </div>
+      <p>a</p>
     </div>
   );
 }
