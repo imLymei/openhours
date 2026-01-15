@@ -24,7 +24,7 @@ export default function Navbar() {
               className: [
                 "flex items-center justify-center p-4",
                 {
-                  "bg-green-500 hover:bg-green-400!":
+                  "bg-green-500 hover:bg-green-400! active:bg-green-600":
                     pathnameEndpoint === navbarLink.href.split("/")[1],
                 },
               ],

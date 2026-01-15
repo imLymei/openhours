@@ -5,6 +5,7 @@ import { APP } from "@/lib/config";
 import { cx } from "@/lib/utils";
 import { ThemeProvider } from "next-themes";
 import Navbar from "./_components/Navbar";
+import Head from "next/head";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,6 +29,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <Head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+        />
+      </Head>
       <body
         className={cx(
           geistSans.variable,
@@ -41,7 +48,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <main className="mb-24 flex-1 overflow-auto">{children}</main>
+          <main className="container mx-auto flex-1 overflow-auto p-4 pb-24">
+            {children}
+          </main>
           <Navbar />
         </ThemeProvider>
       </body>

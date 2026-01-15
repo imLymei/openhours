@@ -1,18 +1,25 @@
 import { useEffect, useRef, useState } from "react";
 
-export default function useTime(): {
+type TimeData = {
   hour: number;
   minute: number;
   seconds: number;
-} {
+  formated: string;
+};
+
+export default function useTime(): TimeData {
   const [time, setTime] = useState(() => {
     const date = new Date();
 
-    return {
+    const data: TimeData = {
       hour: date.getHours(),
       minute: date.getMinutes(),
       seconds: date.getSeconds(),
+      formated: "",
     };
+    data.formated = `${data.hour.toString().padStart(2, "0")}:${data.minute.toString().padStart(2, "0")}:${data.seconds.toString().padStart(2, "0")}`;
+
+    return data;
   });
   const intervalId = useRef<NodeJS.Timeout>(null);
 
@@ -20,11 +27,15 @@ export default function useTime(): {
     setTime(() => {
       const date = new Date();
 
-      return {
+      const data: TimeData = {
         hour: date.getHours(),
         minute: date.getMinutes(),
         seconds: date.getSeconds(),
+        formated: "",
       };
+      data.formated = `${data.hour.toString().padStart(2, "0")}:${data.minute.toString().padStart(2, "0")}:${data.seconds.toString().padStart(2, "0")}`;
+
+      return data;
     });
   }
 

@@ -1,7 +1,12 @@
 import { IconType } from "react-icons";
 import packageData from "../../package.json";
 import { AiFillHome } from "react-icons/ai";
-import { FaRegCalendar, FaUser } from "react-icons/fa6";
+import {
+  FaArrowLeft,
+  FaArrowRight,
+  FaRegCalendar,
+  FaUser,
+} from "react-icons/fa6";
 
 export const APP = {
   name: "OpenHours",
@@ -18,7 +23,10 @@ export const ICON_SIZES = {
   EXTRA_LARGE: BASE_ICONS_SIZE * 2,
 };
 
-export const ICONS = {};
+export const ICONS = {
+  ARROW_LEFT: FaArrowLeft,
+  ARROW_RIGHT: FaArrowRight,
+};
 
 type NavbarLink = {
   title: string;
