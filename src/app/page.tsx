@@ -26,15 +26,13 @@ export default function Home() {
     [workTimes],
   );
   const isWorking = useMemo(
-    () => lastWorkTime?.finalTime === undefined,
+    () => lastWorkTime && lastWorkTime.finalTime === undefined,
     [lastWorkTime],
   );
   const currentWorkingHours: TimeData = useMemo(() => {
-    if (!isWorking) return new TimeData();
+    if (!isWorking || !lastWorkTime) return new TimeData();
 
-    console.log(lastWorkTime?.startTime ?? "aksdhj");
-
-    const timeData = new TimeData(lastWorkTime!.startTime);
+    const timeData = new TimeData(lastWorkTime.startTime);
 
     return timeData.timeSince(time);
   }, [isWorking, lastWorkTime, time]);
@@ -60,7 +58,9 @@ export default function Home() {
       <div className="flex-1 overflow-auto">
         {JSON.stringify(workTimes, null, 2)}
       </div>
-      <div>{JSON.stringify(currentWorkingHours)}</div>
+      <div className="text-center font-bold text-neutral-500">
+        {currentWorkingHours.toString()}
+      </div>
       <div className="flex gap-2">
         <Show when={!isWorking}>
           <Button variant="destructive" className="flex-1">
