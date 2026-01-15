@@ -1,23 +1,15 @@
+import TimeData from "@/lib/TimeData";
 import { useEffect, useRef, useState } from "react";
-
-type TimeData = {
-  hour: number;
-  minute: number;
-  seconds: number;
-  formated: string;
-};
 
 export default function useTime(): TimeData {
   const [time, setTime] = useState(() => {
     const date = new Date();
 
-    const data: TimeData = {
-      hour: date.getHours(),
-      minute: date.getMinutes(),
-      seconds: date.getSeconds(),
-      formated: "",
-    };
-    data.formated = `${data.hour.toString().padStart(2, "0")}:${data.minute.toString().padStart(2, "0")}:${data.seconds.toString().padStart(2, "0")}`;
+    const data: TimeData = new TimeData(
+      date.getHours(),
+      date.getMinutes(),
+      date.getSeconds(),
+    );
 
     return data;
   });
@@ -27,13 +19,11 @@ export default function useTime(): TimeData {
     setTime(() => {
       const date = new Date();
 
-      const data: TimeData = {
-        hour: date.getHours(),
-        minute: date.getMinutes(),
-        seconds: date.getSeconds(),
-        formated: "",
-      };
-      data.formated = `${data.hour.toString().padStart(2, "0")}:${data.minute.toString().padStart(2, "0")}:${data.seconds.toString().padStart(2, "0")}`;
+      const data: TimeData = new TimeData(
+        date.getHours(),
+        date.getMinutes(),
+        date.getSeconds(),
+      );
 
       return data;
     });
